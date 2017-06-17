@@ -8,29 +8,28 @@ import org.scalatest.FunSuite
 import scala.collection.immutable.Set
 
 class GraphTest extends FunSuite {
-  val node = Company("ABC Pvt Ltd")
-  val someNodes = Set(Node(Company("ABC Pvt Ltd")),
-    Node(Person("paul.perera@test.com","Paul", "Perera")),
-    Node(Person("peter.hull@test.com","Peter", "Hull")),
-    Node(Company("BCD Pvt Ltd")),
-    Node(Person("ben.adler@test.com","Ben", "Adler")))
+  val vertices = Set(Vertex(Company("ABC Pvt Ltd")),
+    Vertex(Person("paul.perera@test.com","Paul", "Perera")),
+    Vertex(Person("peter.hull@test.com","Peter", "Hull")),
+    Vertex(Company("BCD Pvt Ltd")),
+    Vertex(Person("ben.adler@test.com","Ben", "Adler")))
 
   val edges = Set(
-    (Node(Company("ABC Pvt Ltd")), Node(Person("paul.perera@test.com","Paul", "Perera"))),
-    (Node(Company("BCD Pvt Ltd")), Node(Person("ben.adler@test.com","Ben", "Adler"))),
-    (Node(Person("paul.perera@test.com","Paul", "Perera")), Node(Person("ben.adler@test.com","Ben", "Adler")))
+    Edge((Vertex(Company("ABC Pvt Ltd")), Vertex(Person("paul.perera@test.com","Paul", "Perera"))), FriendOf),
+    Edge((Vertex(Person("ben.adler@test.com","Ben", "Adler")), Vertex(Company("BCD Pvt Ltd"))), WorksAt),
+    Edge((Vertex(Person("paul.perera@test.com","Paul", "Perera")), Vertex(Person("ben.adler@test.com","Ben", "Adler"))), FriendOf)
   )
 
-  val graph = new Graph(someNodes, edges)
+  val graph = new Graph(vertices, edges)
 
   test("should be able to add a node"){
-    val newNode = Node(Person("nanya.ugbode@test.com", "Nanya", "Ugbode"))
+    val newNode = Vertex(Person("nanya.ugbode@test.com", "Nanya", "Ugbode"))
     val newGraph = graph.addVortex(newNode)
-    assert(newGraph.nodes.last == newNode)
+    assert(newGraph.vertices.last == newNode)
   }
 
   test("should be able to add an edge"){
-    val newEdge = Tuple2(Node(Company("ABC Pvt Ltd")), Node(Person("nanya.ugbode@test.com", "Nanya", "Ugbode")))
+    val newEdge = Edge((Vertex(Person("nanya.ugbode@test.com", "Nanya", "Ugbode")), Vertex(Company("ABC Pvt Ltd"))), WorksAt)
     val newGraph = graph.addEdge(newEdge)
     assert(newGraph.edges.last == newEdge)
   }

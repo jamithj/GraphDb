@@ -6,9 +6,10 @@ package com.db.relationship
 
 import scala.collection.immutable.Set
 
-case class Node(entity: Entity) extends Entity
-case class Graph(nodes:Set[Node], edges:Set[(Node,Node)]) extends Entity {
-  def addVortex(node:Node) = new Graph(nodes + node, edges)
-  def addEdge(edge: (Node, Node)) = new Graph(nodes + edge._1 + edge._2, edges + edge)
+case class Vertex(entity: Entity) extends Entity
+case class Edge(vertices: (Vertex, Vertex), relationship: Relationship) extends Relationship
+case class Graph(vertices:Set[Vertex], edges:Set[Edge]) extends Entity {
+  def addVortex(node:Vertex) = new Graph(vertices + node, edges)
+  def addEdge(edge: Edge) = new Graph(vertices + edge.vertices._1 + edge.vertices._2, edges + edge)
 
 }
