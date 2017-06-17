@@ -5,6 +5,7 @@ package com.db.relationship
   */
 
 import org.scalatest.FunSuite
+
 import scala.collection.immutable.Set
 
 class GraphTest extends FunSuite {
@@ -32,5 +33,11 @@ class GraphTest extends FunSuite {
     val newEdge = Edge((Vertex(Person("nanya.ugbode@test.com", "Nanya", "Ugbode")), Vertex(Company("ABC Pvt Ltd"))), WorksAt)
     val newGraph = graph.addEdge(newEdge)
     assert(newGraph.edges.last == newEdge)
+  }
+
+  test("should be able to find all friends of a person"){
+    val person = Person("paul.perera@test.com","Paul", "Perera")
+    val allFriends = graph.search(AllFriendOf(person))
+    allFriends.contains(Edge(Tuple2(Vertex(Person("paul.perera@test.com","Paul", "Perera")), Vertex(Person("ben.adler@test.com","Ben", "Adler"))), FriendOf))
   }
 }
