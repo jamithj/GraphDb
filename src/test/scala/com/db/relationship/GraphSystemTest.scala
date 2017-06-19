@@ -2,11 +2,7 @@ package com.db.relationship
 
 import akka.actor.ActorSystem
 import akka.testkit.{ImplicitSender, TestKit}
-import akka.util.Timeout
 import org.scalatest.{BeforeAndAfterAll, MustMatchers, WordSpecLike}
-
-import scala.concurrent.duration._
-import concurrent.Await
 
 /**
   * Created by jamit on 18/06/2017.
@@ -32,8 +28,6 @@ class GraphSystemTest extends TestKit(ActorSystem("GraphSystem"))
   )
 
   val graph = new Graph(vertices, edges)
-
-  //implicit val timeout = Timeout(5 seconds)
 
   override def afterAll() {
     system.shutdown()

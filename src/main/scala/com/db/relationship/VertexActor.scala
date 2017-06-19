@@ -1,6 +1,6 @@
 package com.db.relationship
 
-import akka.actor.{Actor, ActorLogging, ActorPath, ActorRef}
+import akka.actor.{Actor, ActorLogging, ActorPath}
 import com.db.relationship.ActorMessages.Initialized
 import scala.concurrent.duration._
 

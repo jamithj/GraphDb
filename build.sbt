@@ -4,10 +4,6 @@ version := "0.0.1"
 
 scalaVersion := "2.11.8"
 
-//assemblyJarName in assembly := "rsb.jar"
-
-//target in assembly := baseDirectory.value
-
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 libraryDependencies ++= {
